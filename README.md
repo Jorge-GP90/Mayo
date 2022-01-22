@@ -14,7 +14,7 @@
 |     id      |  integer  |
 |   user_id   |  integer  |
 |  task_name  |  string   |
-| discription |   text    |
+| description |   text    |
 |  deadline   | datetime  |
 |   status    |  string   |
 |  priority   |  string   |
