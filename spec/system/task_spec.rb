@@ -36,7 +36,7 @@ RSpec.describe 'Task management function', type: :system do
     end
     context 'When transitioned to any task details screen' do
       it 'The content of the relevant task is displayed' do
-        expect(page).to have_content show_task.task_name
+        expect(page).to have_content show_task.description
       end
     end
   end

@@ -10,8 +10,8 @@ RSpec.describe Task, type: :model do
     end
     context 'Task with empty description' do
       it 'Validation is caught' do
-        empty_discription = Task.new(task_name: 'Empty description', description: '')
-        expect(empty_discription).not_to be_valid
+        empty_description = Task.new(task_name: 'Empty description', description: '')
+        expect(empty_description).not_to be_valid
       end
     end
     context 'If the task Title and details are described' do

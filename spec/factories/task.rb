@@ -11,11 +11,11 @@ FactoryBot.define do
 
     factory :new_task, class: Task do
       task_name { 'test-task name' }
-      discription { 'test-description name' }
+      description { 'test-description name' }
     end
     factory :show_task, class: Task do
       task_name { 'Test-task  detail screen' }
-      discription { 'Test-description detail screen' }
+      description { 'Test-description detail screen' }
     end
   end
   
