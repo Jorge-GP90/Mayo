@@ -14,8 +14,8 @@ FactoryBot.define do
       description { 'test-description name' }
     end
     factory :show_task, class: Task do
-      task_name { 'Test-task  detail screen' }
-      description { 'Test-description detail screen' }
+      task_name { 'Test name' }
+      description { 'Test description' }
     end
   end
   
