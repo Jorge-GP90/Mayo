@@ -10,12 +10,16 @@ FactoryBot.define do
     end
 
     factory :new_task, class: Task do
-      task_name { 'test-task name' }
-      description { 'test-description name' }
+      task_name { 'Test New Task Name' }
+      description { 'Test New Taks Description ' }
     end
     factory :show_task, class: Task do
-      task_name { 'Test-task  detail screen' }
-      description { 'Test-description detail screen' }
+      task_name { 'Task Name Display' }
+      description { 'Test Description Display' }
+    end
+    factory :latest_task, class: Task do
+      task_name { 'Latest task' }
+      description { 'Listed in descending order of creation date and time' }
     end
   end
   
