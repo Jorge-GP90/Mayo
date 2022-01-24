@@ -1,5 +1,7 @@
 <h1>Tasks</h1>
 
+<%= link_to "Sort by Deadline", tasks_path(sort_deadline: "true") %>
+
 <table>
   <thead>
     <tr>
@@ -19,7 +21,7 @@
         <td><%= task.description %></td>
         <td><%= task.priority %></td>
         <td><%= task.status %></td>
-        <td><%= task.deadline %></td>
+        <td><%= task.deadline, format: :long %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
