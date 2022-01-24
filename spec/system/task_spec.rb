@@ -28,8 +28,11 @@ RSpec.describe 'Task management function', type: :system do
       end
     end
     context 'When tasks are arranged in descending order of creation date and time' do
-it'new task is displayed at the top' do
-          expect(first('.task_row')).to have_content latest_task.task_name
+it'new task is displayed at the top' do  
+  tasklist = all('.task_row')   
+  expect(tasklist[0]).to have_content latest_task.task_name
+  expect(tasklist[1]).to have_content second_task.task_name
+  expect(tasklist[2]).to have_content task.task_name
 end
     end
   end
