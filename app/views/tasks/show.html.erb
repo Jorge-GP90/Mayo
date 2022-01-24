@@ -20,7 +20,7 @@
 
 <p>
   <strong>Deadline:</strong>
-  <%= @task.deadline, format: :long %>
+  <%= l @task.deadline, format: :long %>
 </p>
 <br>
 <%= link_to 'Edit', edit_task_path(@task) %> |
