@@ -1,5 +1,9 @@
 require 'rails_helper'
 RSpec.describe 'Task management function', type: :system do
+  let!(:longest_task){ FactoryBot.create(:longest_task)}
+  let!(:task){ FactoryBot.create(:task) }
+  let!(:second_task){ FactoryBot.create(:second_task) }
+  let!(:latest_task){ FactoryBot.create(:latest_task) }
   describe 'New creation function' do
     let!(:new_task){ FactoryBot.build(:new_task) }
      before do
@@ -15,10 +19,6 @@ RSpec.describe 'Task management function', type: :system do
     end
   end
   describe 'List display function' do
-    let!(:longest_task){ FactoryBot.create(:longest_task)}
-    let!(:task){ FactoryBot.create(:task) }
-    let!(:second_task){ FactoryBot.create(:second_task) }
-    let!(:latest_task){ FactoryBot.create(:latest_task) }
     before do
       visit tasks_path
     end
@@ -49,6 +49,43 @@ RSpec.describe 'Task management function', type: :system do
       it 'The content of the relevant task is displayed' do
         expect(page).to have_content show_task.task_name
       end
+    end
+  end
+  
+  
+  
+  describe 'Search Function' do
+    before do
+      visit tasks_path
+    end
+    context 'Fuzzy Search by Task Name' do
+      before do
+        fill_in 'task_task_name', with: 'Long'
+        click_on 'search'
+      end
+     it 'Key word search' do
+      expect(page).to have_content 'Long'
+     end
+    end
+    context 'Status Search' do
+      before do
+        select 'in_progress', from: 'task[status]'
+        click_on 'search'
+      end
+     it 'Filter Status matched ' do
+       expect(page).to have_content 'in_progress'
+     end
+    end
+    context 'Fuzzy Search Task and Status Search' do
+      before do
+        fill_in 'task_task_name', with: 'Long'
+        select 'in_progress', from: 'task[status]'
+        click_on 'search'
+      end
+     it 'Contain Fuzzy search task and status' do
+       expect(page).to have_content 'Long'
+       expect(page).to have_content 'in_progress'
+     end
     end
   end
 end

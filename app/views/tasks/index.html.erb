@@ -1,14 +1,20 @@
 <h1>Tasks</h1>
 
-<%= link_to "Sort by expired_at", tasks_path(sort_expired: "true") %>
-<br>
+<div class= "links">
+  <%= link_to "Sort by expired_at", tasks_path(sort_expired: "true") %>
+  <br>
+  <%= link_to 'New Task', new_task_path %>
+</div>
+
+<div class= "search_task">
 <%= form_with scope: :task, url: tasks_path, method: :get, local: true do |f| %>
    <%= f.label :task_name %>
    <%= f.text_field :task_name %>
    <%= f.label :status %>
    <%= f.select :status, Status.options_for_status, include_blank: true %>
    <%= f.submit :search %>
- <% end %>
+<% end %>
+</div>
 <hr>
 <table>
   <thead>
@@ -22,7 +28,7 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class= "task_list">
     <% @tasks.each do |task| %>
       <tr>
         <td class= "task_row" ><%= task.task_name %></td>
