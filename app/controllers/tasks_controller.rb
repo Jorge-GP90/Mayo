@@ -3,23 +3,23 @@ class TasksController < ApplicationController
 
   def index
     if params[:sort_expired]
-      @tasks = Task.all.order("expired_at DESC")
+      @tasks = Task.all.order("expired_at DESC").page(params[:page]).per(3)
     elsif params[:sort_priority]
-      @tasks = Task.all.order("priority DESC")
+      @tasks = Task.all.order("priority DESC").page(params[:page]).per(3)
     else
       if params[:task].present?
         if params[:task][:task_name].present? && params[:task][:status].present?
-          @tasks = Task.search_task_name(params[:task][:task_name]).search_status(params[:task][:status])
+          @tasks = Task.search_task_name(params[:task][:task_name]).search_status(params[:task][:status]).page(params[:page]).per(3)
         elsif params[:task][:task_name].present?
-          @tasks = Task.search_task_name(params[:task][:task_name])
+          @tasks = Task.search_task_name(params[:task][:task_name]).page(params[:page]).per(3)
         elsif params[:task][:status].present?
-          @tasks = Task.search_status(params[:task][:status])
+          @tasks = Task.search_status(params[:task][:status]).page(params[:page]).per(3)
         end
       else
         if params[:sort_expired].present?
-          @tasks = Task.all.order("expired_at DESC")
+          @tasks = Task.all.order("expired_at DESC").page(params[:page]).per(3)
         else
-          @tasks = Task.all.order("created_at DESC")
+          @tasks = Task.all.order("created_at DESC").page(params[:page]).per(3)
         end
       end
     end
