@@ -2,9 +2,10 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
-    # @tasks = Task.all.order("created_at DESC")
     if params[:sort_expired]
       @tasks = Task.all.order("expired_at DESC")
+    elsif params[:sort_priority]
+      @tasks = Task.all.order("priority ASC")
     else
       if params[:task].present?
         if params[:task][:task_name].present? && params[:task][:status].present?

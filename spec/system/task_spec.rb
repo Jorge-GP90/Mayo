@@ -31,7 +31,7 @@ RSpec.describe 'Task management function', type: :system do
     context 'When tasks are arranged in descending order of creation date and time and the longest' do
       before do
         visit tasks_path
-        click_on 'Sort by expired_at'
+        click_on 'Expired_at'
       end
       it'new task is displayed at the top' do  
         tasklist = all('.expired_row') 

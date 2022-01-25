@@ -21,9 +21,9 @@
     <tr>
       <th>Task name</th>
       <th>Description</th>
-      <th>Priority</th>
+      <th><%= link_to "Priority", tasks_path(sort_priority: "true") %></th>
       <th>Status</th>
-      <th>Expired_at</th>
+      <th><%= link_to "Expired_at", tasks_path(sort_expired: "true") %></th>
       <th colspan="3"></th>
     </tr>
   </thead>
