@@ -15,6 +15,7 @@ RSpec.describe 'Task management function', type: :system do
     end
   end
   describe 'List display function' do
+    let!(:longest_task){ FactoryBot.create(:longest_task)}
     let!(:task){ FactoryBot.create(:task) }
     let!(:second_task){ FactoryBot.create(:second_task) }
     let!(:latest_task){ FactoryBot.create(:latest_task) }
@@ -24,16 +25,18 @@ RSpec.describe 'Task management function', type: :system do
     context 'When transitioning to the list screen' do
       it 'The created task list is displayed' do
         expect(page).to have_content task.task_name
-        expect(page).to have_content second_task.description
+        expect(page).to have_content second_task.description  
       end
     end
-    context 'When tasks are arranged in descending order of creation date and time' do
-it'new task is displayed at the top' do  
-  tasklist = all('.task_row')   
-  expect(tasklist[0]).to have_content latest_task.task_name
-  expect(tasklist[1]).to have_content second_task.task_name
-  expect(tasklist[2]).to have_content task.task_name
-end
+    context 'When tasks are arranged in descending order of creation date and time and the longest' do
+      before do
+        visit tasks_path
+        click_on 'Sort by expired_at'
+      end
+      it'new task is displayed at the top' do  
+        tasklist = all('.expired_row') 
+        expect(tasklist[0]).to have_content 'December 31, 2022 00:00'
+      end
     end
   end
   describe 'Detailed display function' do
@@ -44,7 +47,7 @@ end
     end
     context 'When transitioned to any task details screen' do
       it 'The content of the relevant task is displayed' do
-        expect(page).to have_content show_task.description
+        expect(page).to have_content show_task.task_name
       end
     end
   end
