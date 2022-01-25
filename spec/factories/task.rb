@@ -3,7 +3,7 @@ FactoryBot.define do
       task_name { 'Task_name 1 ' }
       description { 'Default description created T1' }
       expired_at { 'February 01, 2022 00:00' }
-      status { 'completed' }
+      status { 'in_progress' }
     end
 
     factory :second_task, class: Task do
@@ -29,7 +29,7 @@ FactoryBot.define do
       task_name { 'Latest task T5' }
       description { ' T5 Listed in descending order of creation date and time' }
       expired_at { 'June 01, 2022 00:00' }
-      status { 'in_progress' }
+      status { 'completed' }
     end
     factory :longest_task, class: Task do  
       task_name { 'Longest Task T6' }
