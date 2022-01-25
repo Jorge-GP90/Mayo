@@ -3,7 +3,7 @@ RSpec.describe 'Task management function', type: :system do
   let!(:longest_task){ FactoryBot.create(:longest_task)}
   let!(:task){ FactoryBot.create(:task) }
   let!(:second_task){ FactoryBot.create(:second_task) }
-  let!(:latest_task){ FactoryBot.create(:latest_task) }
+  let!(:latest_task){ FactoryBot.create(:latest_task) }  
   describe 'New creation function' do
     let!(:new_task){ FactoryBot.build(:new_task) }
      before do
@@ -38,22 +38,18 @@ RSpec.describe 'Task management function', type: :system do
         expect(tasklist[0]).to have_content 'December 31, 2022 00:00'
       end
     end
-  end
-  describe 'Detailed display function' do
-    let!(:show_task){FactoryBot.create(:show_task)}
-    before do
+    context 'Order High Priority Task' do
+      let!(:high_priority_task){ FactoryBot.create(:high_priority_task)}
+      before do
       visit tasks_path
-      first('tbody tr').click_on 'Show'
-    end
-    context 'When transitioned to any task details screen' do
-      it 'The content of the relevant task is displayed' do
-        expect(page).to have_content show_task.task_name
+      click_on 'Priority'
+      end
+      it 'Priority task ordered' do
+        prioritylist = all('.priority') 
+        expect(prioritylist[0]).to have_content 'high' 
       end
     end
   end
-  
-  
-  
   describe 'Search Function' do
     before do
       visit tasks_path
@@ -82,10 +78,25 @@ RSpec.describe 'Task management function', type: :system do
         select 'in_progress', from: 'task[status]'
         click_on 'search'
       end
-     it 'Contain Fuzzy search task and status' do
+      it 'Contain Fuzzy search task and status' do
        expect(page).to have_content 'Long'
        expect(page).to have_content 'in_progress'
-     end
+      end
+    end
+  end
+
+  describe 'Detailed display function' do
+    let!(:show_task){FactoryBot.create(:show_task)}
+    before do
+      visit tasks_path
+      first('tbody tr').click_on 'Show'
+    end
+    context 'When transitioned to any task details screen' do
+      it 'The content of the relevant task is displayed' do
+        expect(page).to have_content show_task.task_name
+      end
     end
   end
 end
+
+  

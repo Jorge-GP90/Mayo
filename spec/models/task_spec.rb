@@ -37,7 +37,6 @@ RSpec.describe Task, type: :model do
     end
     context 'Status Search by scope' do
       it 'Status searched' do
-        binding.irb
         expect(Task.search_status('completed').count).to eq 2
       end
     end

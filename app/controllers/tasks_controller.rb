@@ -5,7 +5,7 @@ class TasksController < ApplicationController
     if params[:sort_expired]
       @tasks = Task.all.order("expired_at DESC")
     elsif params[:sort_priority]
-      @tasks = Task.all.order("priority ASC")
+      @tasks = Task.all.order("priority DESC")
     else
       if params[:task].present?
         if params[:task][:task_name].present? && params[:task][:status].present?
