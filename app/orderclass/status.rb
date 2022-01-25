@@ -2,7 +2,7 @@ class Status
   def self.options_for_enum 
     { not_started: 0,
       in_progress: 1,
-      done: 2,
+      completed: 2,
     }
   end
   def self.options_for_status

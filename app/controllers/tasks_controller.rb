@@ -6,7 +6,21 @@ class TasksController < ApplicationController
     if params[:sort_expired]
       @tasks = Task.all.order("expired_at DESC")
     else
-      @tasks = Task.all.order("created_at DESC")
+      if params[:task].present?
+        if params[:task][:task_name].present? && params[:task][:status].present?
+          @tasks = Task.search_task_name(params[:task][:task_name]).search_status(params[:task][:status])
+        elsif params[:task][:task_name].present?
+          @tasks = Task.search_task_name(params[:task][:task_name])
+        elsif params[:task][:status].present?
+          @tasks = Task.search_status(params[:task][:status])
+        end
+      else
+        if params[:sort_expired].present?
+          @tasks = Task.all.order("expired_at DESC")
+        else
+          @tasks = Task.all.order("created_at DESC")
+        end
+      end
     end
   end
 
