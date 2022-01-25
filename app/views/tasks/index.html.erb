@@ -21,7 +21,7 @@
         <td><%= task.description %></td>
         <td><%= task.priority %></td>
         <td><%= task.status %></td>
-        <td class="expired_row"><%= l task.expired_at, format: :long %></td>
+        <td class="expired_row"><%= l(task.expired_at, format: :long) %></td>
         <td><%= link_to 'Show', task %></td>
         <td><%= link_to 'Edit', edit_task_path(task) %></td>
         <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>

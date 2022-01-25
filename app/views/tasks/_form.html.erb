@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :status %>
-    <%= form.text_field :status %>
+    <%= form.select :status, Status.options_for_status, {prompt: false} %>
   </div>
 
   <div class="field">
