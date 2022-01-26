@@ -1,33 +1,100 @@
-<h1>Tasks</h1>
+<div class="d-flex flex-column">
+  <div class="shadow p-3 mb-5 bg-light rounded "> 
+    <div class="p-2 flex-fill">
+      <h1 class="mb-3 flex-fill text-center">Tasks</h1>
+    </div>
+    <div class="p-2 flex-fill">
+      <div class="btn btn-primary new-btn align-self-center ">
+        <%= link_to 'New Task', new_task_path %>
+      </div>
+    </div>
+    <form class="d-flex justify-content-start">
+      <div class="p-2 flex-fill">    
+        <div class="form-row search_task align-items-center">
+          <%= form_with scope: :task, url: tasks_path, method: :get, local: true do |f|  %>
+          <div class="form-group row col-md-5">
+            <%= f.label :task_name, class: "col-sm-4 col-form-label"%>
+            <div class="col-sm-8">
+            <%= f.text_field :task_name, class: "form-control", placeholder: "Search.." %>
+            </div> 
+          </div>
+          <div class="form-group row col-md-5 ">
+            <%= f.label :status, class: "col-sm-4 col-form-label" %>
+            <div class="col-sm-8">
+            <%= f.select :status, Status.options_for_status, class: "form-control form-control-lg"%>
+            </div>
+          </div>
+          <div class="p-2 flex-fill justify-content-between">
+            <div class="form-group row col-md-5">
+              <%= f.submit :search, class: "btn btn-outline-dark" %>      
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </form>
+  </div>
+  
 
-<table>
-  <thead>
-    <tr>
-      <th>Task name</th>
-      <th>Description</th>
-      <th>Priority</th>
-      <th>Status</th>
-      <th>Deadline</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td class= "task_row" ><%= task.task_name %></td>
-        <td><%= task.description %></td>
-        <td><%= task.priority %></td>
-        <td><%= task.status %></td>
-        <td><%= task.deadline %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
+  <div class="shadow p-3 mb-5 bg-light rounded"> 
+    <div class="p-2">
+      <br>
+      <hr>
+      <table class="table table-hover">
+        <thead>
+          <tr class="mx-2 d-inline-block text-justify">
+            <th scope="col" > # </th>
+            <th scope="col" >Task name</th>
+            <th scope="col" >Description</th>
+            <th scope="col" ><%= link_to "Priority", tasks_path(sort_priority: "true") %></th>
+            <th scope="col" >Status</th>
+            <th scope="col" ><%= link_to "Expired_at", tasks_path(sort_expired: "true") %></th>
+            <th scope="col" colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody class="mx-2 d-inline-block text-justify">
+          <% @tasks.each_with_index do |task, index| %>
+          <tr>
+            <td class= "text-justify"><%= index +1 %></td>
+            <td class= "text-justify"><%= task.task_name %></td>
+            <td class= "text-justify"><%= task.description %></td>
+            <td class= "text-justify priority"><%= task.priority %></td>
+            <td class= "text-justify"><%= task.status %></td>
+            <td class= "text-justify expired_row"><%= l(task.expired_at, format: :long) %></td>
+            <td><%= link_to 'Show', task, :class => 'btn btn-outline-info' %></td>
+            <td><%= link_to 'Edit', edit_task_path(task), :class => 'btn btn-outline-secondary' %></td>
+            <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-outline-danger'%></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-<%= link_to 'New Task', new_task_path %>
+  <div class="p-2">
+    <br>
+    <%= paginate(@tasks) %>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

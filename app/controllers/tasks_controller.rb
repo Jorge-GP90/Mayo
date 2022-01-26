@@ -2,7 +2,28 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
-    @tasks = Task.all.order("created_at DESC")
+
+    if params[:sort_expired]
+      @tasks = Task.all.order("expired_at DESC").page(params[:page]).per(3) || 1
+    elsif params[:sort_priority]
+      @tasks = Task.all.order("priority DESC").page(params[:page]).per(3) || 1
+    else
+      if params[:task].present?
+        if params[:task][:task_name].present? && params[:task][:status].present?
+          @tasks = Task.search_task_name(params[:task][:task_name]).search_status(params[:task][:status]).page(params[:page]).per(3) || 1
+        elsif params[:task][:task_name].present?
+          @tasks = Task.search_task_name(params[:task][:task_name]).page(params[:page]).per(3) || 1
+        elsif params[:task][:status].present?
+          @tasks = Task.search_status(params[:task][:status]).page(params[:page]).per(3) || 1
+        end
+      else
+        if params[:sort_expired].present?
+          @tasks = Task.all.order("expired_at DESC").page(params[:page]).per(3) || 1
+        else
+          @tasks = Task.all.order("created_at DESC").page(params[:page]).per(3) || 1
+        end
+      end
+    end
   end
 
   def show
@@ -56,6 +77,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:task_name, :description, :priority, :status, :deadline)
+    params.require(:task).permit(:task_name, :description, :priority, :status, :expired_at)
   end
 end

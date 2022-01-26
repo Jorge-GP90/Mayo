@@ -1,6 +1,18 @@
-<h1>Editing Task</h1>
+<div class="col-md-1">
+</div>
+<div class="col-xs-12 col-md-11">
+  <div class="d-flex justify-content-center">
+    <div class="p-2">
+      <div class="shadow p-3 mb-5 bg-light rounded">
+        <h1>Editing Task</h1>
+        <%= render 'form', task: @task %>
+        <br>
+        <div class="d-flex align-items-end justify-content-between">
+          <div class="p-2"><%= link_to 'Show', @task, :class => 'btn btn-outline-info' %> </div>
+          <div class="p-2"><%= link_to 'Back', tasks_path, :class => 'btn btn-outline-info' %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= render 'form', task: @task %>
-
-<%= link_to 'Show', @task %> |
-<%= link_to 'Back', tasks_path %>

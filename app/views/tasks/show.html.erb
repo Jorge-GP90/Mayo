@@ -1,27 +1,49 @@
-<p>
-  <strong>Task name:</strong>
-  <%= @task.task_name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @task.description %>
-</p>
-
-<p>
-  <strong>Priority:</strong>
-  <%= @task.priority %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @task.status %>
-</p>
-
-<p>
-  <strong>Deadline:</strong>
-  <%= @task.deadline %>
-</p>
-
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<div class="col-md-1">
+</div>
+<div class="col-xs-12 col-md-11">
+  <div class="shadow p-3 mb-5 bg-light rounded">
+    <div class="d-flex flex-column justify-content-center ">
+      <div class="p-2">
+        <p>
+          <strong>Task name:</strong>
+          <%= @task.task_name %>
+        </p>
+      </div>
+      <div class="p-2">
+        <p>
+          <strong>Description:</strong>
+          <%= @task.description %>
+        </p>
+      </div>
+      <div class="p-2">
+        <p>
+          <strong>Priority:</strong>
+          <%= @task.priority %>
+        </p>
+      </div>
+      <div class="p-2">
+        <p>
+          <strong>Status:</strong>
+          <%= @task.status %>
+        </p>
+      </div>
+      <div class="p-2">
+        <p>
+          <strong>Expired_at:</strong>
+          <%= l @task.expired_at, format: :long %>
+        </p>
+      </div>
+      <div class="p-2">
+        <p>
+          <strong>Expired_at:</strong>
+          <%= l @task.expired_at, format: :long %>
+        </p>
+      </div>
+    </div>
+    <br>
+    <div class="d-flex align-items-end justify-content-between">
+    <div class="p-2"><%= link_to 'Edit', edit_task_path(@task), :class => 'btn btn-outline-info' %></div>
+    <div class="p-2"><%= link_to 'Back', tasks_path, :class => 'btn btn-outline-info' %></div>
+    </div>
+  </div>
+</div>
