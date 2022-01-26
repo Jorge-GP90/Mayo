@@ -56,11 +56,11 @@ RSpec.describe 'Task management function', type: :system do
     end
     context 'Fuzzy Search by Task Name' do
       before do
-        fill_in 'task_task_name', with: 'Long'
+        fill_in 'task_task_name', with: 'name'
         click_on 'search'
       end
      it 'Key word search' do
-      expect(page).to have_content 'Long'
+      expect(page).to have_content 'name'
      end
     end
     context 'Status Search' do
