@@ -8,17 +8,17 @@ class SessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to user_path(user.id)
     else
-      flash.now[:danger] = "Has been Login"
+      flash.now[:danger] = "Fail to Login"
       render :new
     end
   end
   def destroy
     session.delete(:user_id)
-    flash.now[:notice] = 'has been Logout'
+    flash.now[:notice] = ' has been Logout'
     redirect_to new_session_path
   end
   private
   def session_params
-   params.require(:session).permit(:email, :password,)
+    params.require(:session).permit(:email, :password,)
   end
 end

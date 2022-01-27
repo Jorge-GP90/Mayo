@@ -14,7 +14,6 @@
  *= require_tree .
  *= require_self
  */
-
 html, body{
     height: 100%;
 }
@@ -22,17 +21,3 @@ html, body{
 header {
     background-color: rgba(0,0,200,0.4);
 }
-
-/* html {
-    background: url(../images/#Name.jpeg);
-} */
-
-/* 
-.body{
-  width: 400px;
-  height: 400px;
-  background: rgba(0,0,0,0.4);
-  padding: 40px;
-  color: skyblue;
-}
- */
