@@ -1,4 +1,4 @@
-100.times do |n|
+10.times do |n|
     user_name = Faker::Movies::StarWars.character
     email = Faker::Internet.email
     password = "password"

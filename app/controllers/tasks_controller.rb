@@ -2,43 +2,42 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit update destroy ]
 
   def index
-
     if params[:sort_expired]
-      @tasks = Task.all.order("expired_at DESC").page(params[:page]).per(3) || 1
+      @tasks = current_user.tasks.order(expired_at: :DESC)
     elsif params[:sort_priority]
-      @tasks = Task.all.order("priority DESC").page(params[:page]).per(3) || 1
+      @tasks = current_user.tasks.order(priority: :DESC)
     else
       if params[:task].present?
         if params[:task][:task_name].present? && params[:task][:status].present?
-          @tasks = Task.search_task_name(params[:task][:task_name]).search_status(params[:task][:status]).page(params[:page]).per(3) || 1
+          @tasks = current_user.tasks.search_task_name(params[:task][:task_name]).search_status(params[:task][:status]).order(created_at: :DESC)
         elsif params[:task][:task_name].present?
-          @tasks = Task.search_task_name(params[:task][:task_name]).page(params[:page]).per(3) || 1
+          @tasks = current_user.tasks.search_task_name(params[:task][:task_name]).order(created_at: :DESC)
         elsif params[:task][:status].present?
-          @tasks = Task.search_status(params[:task][:status]).page(params[:page]).per(3) || 1
+          @tasks = current_user.tasks.search_status(params[:task][:status])
         end
       else
         if params[:sort_expired].present?
-          @tasks = Task.all.order("expired_at DESC").page(params[:page]).per(3) || 1
+          @tasks = current_user.tasks.order(expired_at: :DESC)
         else
-          @tasks = Task.all.order("created_at DESC").page(params[:page]).per(3) || 1
+          @tasks = current_user.tasks.order(created_at: :DESC)
         end
       end
     end
+    @tasks = @tasks.page(params[:page]).per(3)
   end
 
   def show
   end
 
   def new
-    @task = Task.new
+    @task = current_user.tasks.new
   end
 
   def edit
   end
 
   def create
-    @task = Task.new(task_params)
-
+    @task = current_user.tasks.build(task_params)
     respond_to do |format|
       if @task.save
         format.html { redirect_to task_url(@task), notice: "Task #{@task.task_name} was successfully created." }

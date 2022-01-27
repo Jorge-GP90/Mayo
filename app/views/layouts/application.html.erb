@@ -10,15 +10,38 @@
   </head>
 
   <body>
-    <% if flash.notice.present? %>
-       <div class="alert alert-success">
-         <%= flash[:notice] %>
-       </div>
-     <% end %>
+    <header class="sticky-top">
+      <div class="container-fluid">
+        <div class="d-flex flex-row justify-content-between ">
+          <div class="d-flex col-xs-12 col-md-2 ">
+          </div>
+          <div class="d-flex p-3 mt-1 bd-highlight flex-fill  justify-content-between ">
+            <% if logged_in? %>
+              <%= link_to "Profile", user_path(current_user.id), class: "d-flex justify-content-start btn btn-primary new-btn text-white" %>
+              <%= link_to "Logout", session_path(current_user.id), method: :delete, class: "d-flex justify-content-end btn btn-primary new-btn text-white" %>
+              <% else %>
+              <%= link_to "Sign up", new_user_path, class: "d-flex justify-content-start btn btn-primary new-btn text-white " %>
+              <%= link_to "Login", new_session_path, class: "d-flex justify-content-end btn btn-primary new-btn text-white" %>
+            <% end %>
+          </div>
+          <div class="d-flex col-xs-12 col-md-2">
+          </div>
+        </div>
+      </div>
+    </header>
     <div class="container-fluid">
-       <div class="row main">
-         <%= yield %>
-       </div>
-     </div>
+      <div class="d-flex flex-row align-self-center">
+      　<div class="d-flex col-xs-12 col-md-2">
+      　</div>
+      　<div class="p-2 flex-fill bd-highlight">
+        <% flash.each do |key, value| %>
+          <%= content_tag(:p, value, class: "alert alert-#{key}") %>
+        <% end %>
+        <%= yield %>
+        </div>
+        <div class="d-flex col-xs-12 col-md-2">
+        </div>
+      </div>
+    </div>
   </body>
 </html>
