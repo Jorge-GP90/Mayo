@@ -60,7 +60,6 @@ class Admin::UsersController < ApplicationController
   def require_admin
     unless current_user.admin?
       redirect_to root_url
-      # redirect_to new_session_path
       flash[:warning] = "Only administrator users can access"
     end
   end
