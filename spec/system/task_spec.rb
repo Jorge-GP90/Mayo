@@ -1,11 +1,22 @@
 require 'rails_helper'
 RSpec.describe 'Task management function', type: :system do
-  let!(:longest_task){ FactoryBot.create(:longest_task)}
-  let!(:task){ FactoryBot.create(:task) }
-  let!(:second_task){ FactoryBot.create(:second_task) }
-  let!(:latest_task){ FactoryBot.create(:latest_task) }  
+  let!(:user){ FactoryBot.create(:user)}
+  let!(:admin_user){ FactoryBot.create(:admin_user)}
+  let!(:second_user){ FactoryBot.create(:second_user)}
+
+  let!(:longest_task){ FactoryBot.create(:longest_task, user_id: user.id)}
+  let!(:task){ FactoryBot.create(:task, user_id: user.id) }
+  let!(:second_task){ FactoryBot.create(:second_task, user_id: user.id) }
+  let!(:latest_task){ FactoryBot.create(:latest_task, user_id: user.id)}
+
+  before do
+    visit new_session_path
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    find('#create_session').click_on 'Login' 
+  end
   describe 'New creation function' do
-    let!(:new_task){ FactoryBot.build(:new_task) }
+    let!(:new_task){ FactoryBot.build(:new_task, user_id: user.id) }
      before do
        visit new_task_path
        fill_in 'Task name', with: new_task.task_name
@@ -14,7 +25,7 @@ RSpec.describe 'Task management function', type: :system do
     end
     context 'When creating a new task' do
       it 'The created task is displayed' do
-       expect(page).to have_selector '.alert-success', text: new_task.task_name    
+       expect(page).to have_content 'was successfully created.'
       end
     end
   end
@@ -39,7 +50,7 @@ RSpec.describe 'Task management function', type: :system do
       end
     end
     context 'Order High Priority Task' do
-      let!(:high_priority_task){ FactoryBot.create(:high_priority_task)}
+      let!(:high_priority_task){ FactoryBot.create(:high_priority_task, user_id: user.id)}
       before do
       visit tasks_path
       click_on 'Priority'
@@ -86,7 +97,7 @@ RSpec.describe 'Task management function', type: :system do
   end
 
   describe 'Detailed display function' do
-    let!(:show_task){FactoryBot.create(:show_task)}
+    let!(:show_task){FactoryBot.create(:show_task, user_id: user.id)}
     before do
       visit tasks_path
       first('tbody tr').click_on 'Show'

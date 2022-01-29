@@ -65,7 +65,7 @@
             <td class= "text-justify expired_row"><%= l(task.expired_at, format: :long) %></td>
             <td><%= link_to 'Show', task, :class => 'btn btn-outline-info' %></td>
             <td><%= link_to 'Edit', edit_task_path(task), :class => 'btn btn-outline-secondary' %></td>
-            <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-outline-danger'%></td>
+            <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' }, id: "delete_button", class: "btn btn-outline-danger delete-btn" %></td>
           </tr>
           <% end %>
         </tbody>

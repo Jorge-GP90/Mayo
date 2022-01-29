@@ -14,3 +14,21 @@
  *= require_tree .
  *= require_self
  */
+html, body, .container-fluid{
+    height: 100%;
+    margin: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+header  {
+    background-color: rgba(0,0,200,0.4);
+    margin: 0;
+    padding: 0;
+}
+
+.flash  {
+
+    margin: 15px;
+    padding: 10px;
+}

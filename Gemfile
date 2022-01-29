@@ -13,6 +13,10 @@ gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'kaminari'
+gem 'bcrypt','3.1.11'
+gem 'pry-rails'
+gem 'better_errors'
+gem 'binding_of_caller'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -21,6 +25,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.8'
   gem 'factory_bot_rails'
   gem 'rexml'
+  gem 'faker'
 end
 
 group :development do
