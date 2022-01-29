@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  skip_before_action :login_required, only: %i[ new create ]
+  skip_before_action :login_required
   def new
   end
   def create
@@ -13,12 +13,12 @@ class SessionsController < ApplicationController
     end
   end
   def destroy
-    session.delete(:user_id)
+    reset_session
     flash.now[:notice] = ' has been Logout'
     redirect_to new_session_path
   end
   private
   def session_params
-    params.require(:session).permit(:email, :password,)
+    params.require(:session).permit(:email, :password )
   end
 end

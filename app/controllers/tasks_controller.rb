@@ -3,9 +3,9 @@ class TasksController < ApplicationController
 
   def index
     if params[:sort_expired]
-      @tasks = current_user.tasks.order(expired_at: :DESC)
+      @tasks = current_user.tasks.select(:id, :task_name, :description, :expired_at, :status, :priority, :created_at,).order(expired_at: :DESC)
     elsif params[:sort_priority]
-      @tasks = current_user.tasks.order(priority: :DESC)
+      @tasks = current_user.tasks.select(:id, :task_name, :description, :expired_at, :status, :priority, :created_at,).order(priority: :DESC)
     else
       if params[:task].present?
         if params[:task][:task_name].present? && params[:task][:status].present?
@@ -17,9 +17,9 @@ class TasksController < ApplicationController
         end
       else
         if params[:sort_expired].present?
-          @tasks = current_user.tasks.order(expired_at: :DESC)
+          @tasks = current_user.tasks.select(:id, :task_name, :description, :expired_at, :status, :priority, :created_at,).order(expired_at: :DESC)
         else
-          @tasks = current_user.tasks.order(created_at: :DESC)
+          @tasks = current_user.tasks.select(:id, :task_name, :description, :expired_at, :status, :priority, :created_at,).order(created_at: :DESC)
         end
       end
     end

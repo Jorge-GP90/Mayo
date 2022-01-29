@@ -5,6 +5,7 @@ FactoryBot.define do
       expired_at { 'February 01, 2022 00:00' }
       status { 'in_progress' }
       priority { 'low' }
+      association :user
     end
 
     factory :second_task, class: Task do
@@ -13,6 +14,7 @@ FactoryBot.define do
       expired_at { 'March 01, 2022 00:00' }
       status { 'not_started' }
       priority { 'normal' }
+      association :user
     end
 
     factory :new_task, class: Task do
@@ -21,6 +23,7 @@ FactoryBot.define do
       expired_at { '2022-04-01 00:00:00' }
       status { 'completed' }
       priority { 'low' }
+      association :user
     end
     factory :show_task, class: Task do
       task_name { 'Task Name Display T4' }
@@ -28,6 +31,7 @@ FactoryBot.define do
       expired_at { '2022-05-01 00:00:00' }
       status { 'completed' }
       priority { 'normal' }
+      association :user
     end
     factory :latest_task, class: Task do
       task_name { 'Latest task T5' }
@@ -35,6 +39,7 @@ FactoryBot.define do
       expired_at { 'June 01, 2022 00:00' }
       status { 'completed' }
       priority { 'normal' }
+      association :user
     end
     factory :longest_task, class: Task do  
       task_name { 'Longest Task T6' }
@@ -42,6 +47,7 @@ FactoryBot.define do
       expired_at { 'December 31, 2022 00:00' }
       status { 'in_progress' }
       priority { 'high' }
+      association :user
     end
     factory :high_priority_task, class: Task do
       task_name { 'High Priority Tast' }
@@ -49,6 +55,7 @@ FactoryBot.define do
       expired_at { 'June 12, 2022 00:00' }
       status { 'in_progress' }
       priority { 'high' }
+      association :user
     end
   end
   

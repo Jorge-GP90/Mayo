@@ -25,7 +25,9 @@ class UsersController < ApplicationController
   end
   
   def show
-    if @user.id != current_user.id
+    if @user.id == current_user.id || current_user.admin?
+      @tasks = current_user.tasks.select(:id, :task_name, :description, :expired_at, :status, :priority, :created_at,).order("created_at DESC")
+    else
       redirect_to tasks_path
     end
   end
@@ -44,13 +46,13 @@ class UsersController < ApplicationController
   
   def destroy
     @user.destroy
-    redirect_to users_path
-    flash.now[:notice] = "User #{@user.user_name} has been Deleted"
+    redirect_to new_user_path
+    flash[:notice] = "User #{@user.user_name} has been Deleted"
   end
   
   private
   def user_params
-    params.require(:user).permit(:user_name, :email, :password, :password_confirmation,)
+    params.require(:user).permit(:user_name, :email, :password, :password_confirmation, :admin)
   end
   def set_user
     @user = User.find(params[:id])
