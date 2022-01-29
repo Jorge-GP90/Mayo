@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   end
   root to: 'tasks#index'
   resources :tasks
-  resources :users
+  resources :users, only: %i[ new show edit create destroy ]
   resources :sessions, only: %i[ new create destroy ]
 end
