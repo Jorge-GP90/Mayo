@@ -33,7 +33,18 @@ header  {
     padding: 10px;
 }
 
-td .label_style {
+td .label_style{
    font-size: 8px;
    padding: .125rem .25rem;
  }
+
+#label_show{
+   font-size: 8px;
+   padding: .125rem .25rem;
+ }
+ 
+td .fun_b{
+    padding: 0px;
+    margin: 0px;
+}
+

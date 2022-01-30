@@ -15,7 +15,7 @@ class TasksController < ApplicationController
         elsif params[:task][:status].present?
           @tasks = current_user.tasks.search_status(params[:task][:status]).order(created_at: :DESC)
         elsif params[:task][:label_id].present?
-          @tasks = current_user.tasks.search_status(params[:task][:label_id]).order(created_at: :DESC)
+          @tasks = current_user.tasks.search_status(params[:task][:label_id])
         end
       else
         if params[:sort_expired].present?

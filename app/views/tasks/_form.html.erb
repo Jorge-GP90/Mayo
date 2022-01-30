@@ -39,7 +39,7 @@
       </div>
       
       <div class="form-check task_unit_check">
-        <%= f.collection_check_boxes(:label_ids, Label.all, :id, :label_name) do |cb| %>
+        <%= form.collection_check_boxes(:label_ids, Label.all, :id, :label_name) do |cb| %>
         <div class="form-check-label">
           <%= cb.label { cb.check_box + cb.text } %>
         </div>
