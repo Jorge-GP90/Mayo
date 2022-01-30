@@ -32,3 +32,8 @@ header  {
     margin: 15px;
     padding: 10px;
 }
+
+td .label_style {
+   font-size: 8px;
+   padding: .125rem .25rem;
+ }

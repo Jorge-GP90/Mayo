@@ -13,7 +13,9 @@ class TasksController < ApplicationController
         elsif params[:task][:task_name].present?
           @tasks = current_user.tasks.search_task_name(params[:task][:task_name]).order(created_at: :DESC)
         elsif params[:task][:status].present?
-          @tasks = current_user.tasks.search_status(params[:task][:status])
+          @tasks = current_user.tasks.search_status(params[:task][:status]).order(created_at: :DESC)
+        elsif params[:task][:label_id].present?
+          @tasks = current_user.tasks.search_status(params[:task][:label_id]).order(created_at: :DESC)
         end
       else
         if params[:sort_expired].present?
@@ -76,6 +78,6 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:task_name, :description, :priority, :status, :expired_at)
+    params.require(:task).permit(:task_name, :description, :priority, :status, :expired_at, { label_ids: [] })
   end
 end
