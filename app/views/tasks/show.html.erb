@@ -1,43 +1,40 @@
 <div class="col-md-1">
 </div>
-<div class="col-xs-12 col-md-11">
-  <div class="shadow p-3 mb-5 bg-light rounded">
-    <div class="d-flex flex-column justify-content-center ">
-      <div class="p-2">
-        <p>
-          <strong>Task name:</strong>
-          <%= @task.task_name %>
-        </p>
+<div class="col-xs-12 col-md-11 ">
+  <h1 class="mb-3 d-flex justify-content-center"> Show Tasks</h1>
+  <div class="shadow p-3 mb-5 bg-light rounded ">
+    <div class=" justify-content-center ">
+      <div class="justify-content-center text-justify">
+        <strong>Task name:</strong>
+        <%= @task.task_name %>
       </div>
-      <div class="p-2">
-        <p>
+      <div class="justify-content-center text-justify">
           <strong>Description:</strong>
           <%= @task.description %>
-        </p>
       </div>
-      <div class="p-2">
-        <p>
+      <div class="justify-content-center text-justify">
           <strong>Priority:</strong>
           <%= @task.priority %>
-        </p>
       </div>
-      <div class="p-2">
-        <p>
+      <div class="justify-content-center text-justify">
           <strong>Status:</strong>
           <%= @task.status %>
-        </p>
       </div>
-      <div class="p-2">
-        <p>
+      <div class="justify-content-center text-justify">
           <strong>Expired_at:</strong>
           <%= l @task.expired_at, format: :long %>
-        </p>
+      </div>
+      <% @task.labels.each do |label| %>
+      <div class="btn btn-secondary" id="label_show">
+        <%= label.label_name %>
+      </div>
+      <% end %> 
       </div>
     </div>
     <br>
     <div class="d-flex align-items-end justify-content-between">
-    <div class="p-2"><%= link_to 'Edit', edit_task_path(@task), :class => 'btn btn-outline-info' %></div>
-    <div class="p-2"><%= link_to 'Back', tasks_path, :class => 'btn btn-outline-info' %></div>
+      <div class="justify-content-center text-justify"><%= link_to 'Edit', edit_task_path(@task.id), :class => 'btn btn-outline-info' %></div>
+      <div class="justify-content-center text-justify"><%= link_to 'Back', tasks_path(@task.id), :class => 'btn btn-outline-info' %></div>
     </div>
   </div>
 </div>

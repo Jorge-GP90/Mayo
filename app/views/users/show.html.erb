@@ -1,6 +1,6 @@
-<div class="flex-fill bd-highlight align-self-center">
+<div class="col-md-1">
 </div>
-<div class="flex-column justify-content-center align-self-center  ">
+<div class="col-xs-12 col-md-11">
   <div class="card mt-3 flex-fill " style="width: 50rem;" >
     <div class="card-header text-center ">
       <h2><%= @user.user_name %>'s page</h2>
@@ -14,7 +14,45 @@
       </div>
     </div>
   </div>
-  <div class="p-2 btn btn-primary new-btn  btn-sm mt-4 mb-4 justify-content-center">
+  <div class="btn btn-primary new-btn  btn-sm mt-4 mb-4 justify-content-center">
     <%= link_to 'New Task', new_task_path %>
+  </div>
+  <div class="shadow p-3 mb-5 bg-light rounded"> 
+    <table class="table table-hover">
+      <thead>
+        <tr class="mx-2 d-inline-block text-justify">
+          <th scope="col" > # </th>
+          <th scope="col" >Task name</th>
+          <th scope="col" >Description</th>
+          <th scope="col" ><%= link_to "Priority", tasks_path(sort_priority: "true") %></th>
+          <th scope="col" >Status</th>
+          <th scope="col" ><%= link_to "Expired_at", tasks_path(sort_expired: "true") %></th>
+          <th scope="col" >Label</th>
+          <th scope="col" colspan="3"></th>
+        </tr>
+      </thead>
+      <tbody class="mx-2 d-inline-block text-justify">
+        <% @tasks.each_with_index do |task, index| %>
+        <tr>
+          <td class= "text-justify"><%= index +1 %></td>
+          <td class= "text-justify"><%= task.task_name %></td>
+          <td class= "text-justify"><%= task.description %></td>
+          <td class= "text-justify priority"><%= task.priority %></td>
+          <td class= "text-justify"><%= task.status %></td>
+          <td class= "text-justify expired_row"><%= l(task.expired_at, format: :long) %></td>
+          <td class= "text-justify">
+          <% task.labels.each do |label| %>
+            <div class="label_style btn btn-secondary">
+             <%= label.label_name %>
+            </div>
+          <% end %>
+          </td>
+          <td class= "fun_b"><%= link_to 'Show', task_path(task.id), class: 'btn btn-outline-info' %></td>
+          <td class= "fun_b"><%= link_to 'Edit', edit_task_path(task.id), class: 'btn btn-outline-secondary' %></td>
+          <td class= "fun_b"><%= link_to 'Destroy', task_path(task.id), method: :delete, data: { confirm: 'Are you sure?' }, id: "delete_button", class: "btn btn-outline-danger delete-btn" %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
 </div>

@@ -2,6 +2,8 @@ class Task < ApplicationRecord
   before_validation :set_default_expired, on: %i[ create update ]
   validates :task_name, :description, :status, presence: true
   belongs_to :user
+  has_many :task_labels, dependent: :destroy
+  has_many :labels, through: :task_labels, source: :label
   
   require './app/orderclass/status'
   enum status: Status.options_for_enum
@@ -11,6 +13,7 @@ class Task < ApplicationRecord
   
   scope :search_task_name, -> (task_name) { where('task_name LIKE ?', "%#{task_name}%") }
   scope :search_status, -> (status) { where(status: status) }
+  scope :search_label, -> (label_id) { joins(:task_labels).where(task_labels: {label_id: label_id}) }
 
   private
   def set_default_expired

@@ -1,5 +1,5 @@
 FactoryBot.define do
-    factory :task do
+    factory :task, class: Task do
       task_name { 'Task_name 1 ' }
       description { 'Default description created T1' }
       expired_at { 'February 01, 2022 00:00' }

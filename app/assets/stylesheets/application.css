@@ -27,8 +27,33 @@ header  {
     padding: 0;
 }
 
+header #header_btns{
+    padding: 0;
+    margin: 10px;
+    color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+
+}
+
 .flash  {
 
     margin: 15px;
     padding: 10px;
 }
+
+td .label_style{
+   font-size: 8px;
+   padding: .125rem .25rem;
+ }
+
+#label_show{
+   font-size: 8px;
+   padding: .125rem .25rem;
+ }
+ 
+td .fun_b{
+    padding: 0px;
+    margin: 0px;
+}
+
