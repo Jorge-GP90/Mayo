@@ -26,7 +26,7 @@ end
                 )
 end
 task_labels_list = []
- Task.all.ids.each do |task_id|
+Task.all.ids.each do |task_id|
    task_labels_list << { task_id: task_id, label_id: rand(1..10) }
- end
- TaskLabel.create!(task_labels_list)
+end
+TaskLabel.create!(task_labels_list)
