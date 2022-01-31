@@ -18,15 +18,15 @@ User.create!(user_name: "admin_user",
 10.times do |n|
    label_name = "Label#{n}"
    Label.create!(label_name: label_name)
- end
+end
 
 
 
-10.times do |n|
+100.times do |n|
     expired_at = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default)
     status = rand(2)
     priority = rand(2)
-    user_id = rand(1..100)
+    user_id = rand(1..10)
     Task.create!(task_name: "Task#{n} individual",
                  description: "Task#{n}individual description",
                  expired_at: expired_at,
