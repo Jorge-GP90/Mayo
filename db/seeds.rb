@@ -7,10 +7,20 @@
                  password: password,
                  admin: false
                  )
+end
+
+User.create!(user_name: "admin_user",
+              email: "admin@mail.com",
+              password: "password",
+              admin: true
+              )
+
 10.times do |n|
    label_name = "Label#{n}"
-   Label.create!(label_name: label_name)              
-end
+   Label.create!(label_name: label_name)
+ end
+
+
 
 10.times do |n|
     expired_at = Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :default)
