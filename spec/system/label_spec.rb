@@ -21,6 +21,8 @@ RSpec.describe 'Label function', type: :system do
       check 'Label１'
       check 'Label２'
       click_on 'Register'
+      
+      
     end
     context 'New Task creation ' do
       it 'Show Stringging Label ' do
