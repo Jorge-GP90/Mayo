@@ -9,42 +9,42 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body class="container-fluid flex-fill bd-highlight">
-    <header class="sticky-top flex-fill">
+  <body>
+    <header class="sticky-top">
       <div class="container-fluid">
-        <div class="d-flexflex-row justify-content-between ">
-          <div class="d-flex col-xs-12 col-md-2 ">
+        <div class="row justify-content-between ">
+          <div class="col-xs-12 col-md-2 ">
           </div>
-          <div class="d-flex p-3 mt-1 bd-highlight flex-fill  justify-content-between ">
-            <% if logged_in? %>
-              <%= link_to "Profile", user_path(current_user.id), class: "d-flex justify-content-start btn btn-primary new-btn text-white" %>
-              <%= link_to "Logout", session_path(current_user.id), method: :delete, class: "d-flex justify-content-end btn btn-primary new-btn text-white" %>
-              <% if current_user.admin? %>
-                <%= link_to "User List ", admin_users_path %>
+          <div class="d-flex bd-highlight">
+            <div class="mt-1 p-3 bd-highlight align-self-center">
+              <% if logged_in? %>
+                <%= link_to "Profile", user_path(current_user.id), id: "header_btns", class: "justify-content-around btn btn-outline" %>
+                <%= link_to "Logout", session_path(current_user.id), method: :delete, id: "header_btns", class: "justify-content-around btn btn-outline" %>
+                <% if current_user.admin? %>
+                  <%= link_to "User List ", admin_users_path, id: "header_btns", class: "justify-content-around btn btn-outline" %>
+                <% end %>
+              <% else %>
+                <%= link_to "Sign up", new_user_path, id: "header_btns", class: "justify-content-around btn btn-outline" %>
+                <%= link_to "Login", new_session_path, id: "header_btns", class: "justify-content-around btn btn-outline" %>
               <% end %>
-            <% else %>
-              <%= link_to "Sign up", new_user_path, class: "d-flex justify-content-start btn btn-primary new-btn text-white " %>
-              <%= link_to "Login", new_session_path, class: "d-flex justify-content-end btn btn-primary new-btn text-white" %>
-            <% end %>
+            </div>
           </div>
-          <div class="d-flex col-xs-12 col-md-2">
+          <div class="col-xs-12 col-md-2">
           </div>
         </div>
       </div>
     </header>
-    <div class="flex-row bd-highlight mb-3">
-      <%# <div class="p-2 flex-row align-self-center"> %>
-      　<div class="p-2 align-self-start" id="flash">
-        <% flash.each do |key, value| %>
-          <%= content_tag(:div, value, class: "alert alert-#{key}") %>
-        <% end %>
-      　</div>
-      　<div class="p-2 bd-highlight align-self-center">
-        <%= yield %>
-        </div>
-        <div class="p-2 align-self-end">
-        </div>
-      <%# </div> %>
+    <div class="container-fluid">
+      <div class="align-self-start" id="flash">
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+      <% end %>
+      </div>
+      <div class="bd-highlight align-self-center">
+      <%= yield %>
+      </div>
+      <div class="align-self-end">
+      </div>
     </div>
   </body>
 </html>
